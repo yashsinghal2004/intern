@@ -1,11 +1,28 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Project Structure
 
-First, run the development server:
 
-```bash
-npm run dev
+├── src/
+│   └── app/
+│       ├── cart/
+│       │   └── page.js
+│       ├── product/
+│       │   └── [id]/
+│       │       └── page.js
+│       └── page.js
+├── package.json
+├── tailwind.config.js
+├── postcss.config.js
+├── README.md
+└── ...
+
+## 📦 Folder Structure
+
+- `src/app/page.js` - Home page (product grid, infinite scroll, filter)
+- `src/app/product/[id]/page.js` - Product detail page
+- `src/app/cart/page.js` - Cart page
+
 # or
 yarn dev
 # or
