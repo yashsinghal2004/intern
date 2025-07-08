@@ -1,8 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+---
 
-## Project Structure
+# 🛒 Product Catalog Viewer
 
+A modern, responsive product catalog web app built with [Next.js](https://nextjs.org), [React](https://react.dev), and [TailwindCSS](https://tailwindcss.com).  
+Features infinite scroll, category filtering, product detail view, and a persistent cart.
 
+---
+
+## 🚀 Features
+
+- **Infinite Scroll** with dynamic pagination bar
+- **Category Filtering** (from FakestoreAPI)
+- **Product Detail Page** (with add to cart)
+- **Cart Page** (with quantity, remove, and total)
+- **Responsive Design** for mobile and desktop
+- **Clean, well-organized code**
+
+---
+
+## 📦 Project Structure
+
+```
+product-catalog/
 ├── src/
 │   └── app/
 │       ├── cart/
@@ -16,38 +35,101 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ├── postcss.config.js
 ├── README.md
 └── ...
-
-## 📦 Folder Structure
-
-- `src/app/page.js` - Home page (product grid, infinite scroll, filter)
-- `src/app/product/[id]/page.js` - Product detail page
-- `src/app/cart/page.js` - Cart page
-
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Key Files
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- `src/app/page.js` — Home page (product grid, infinite scroll, filter)
+- `src/app/product/[id]/page.js` — Product detail page
+- `src/app/cart/page.js` — Cart page
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠️ Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+1. **Clone the repo:**
+   ```bash
+   git clone https://github.com/your-username/product-catalog.git
+   cd product-catalog
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   # or
+   bun install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   # or
+   bun dev
+   ```
 
-## Deploy on Vercel
+4. **Open [http://localhost:3000](http://localhost:3000) in your browser.**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ✨ Usage
+
+- Browse products with infinite scroll and dynamic pagination.
+- Filter products by category.
+- Click a product to view details and add to cart.
+- View and manage your cart (quantity, remove, total).
+
+---
+
+## ⚡ Assumptions & Limitations
+
+- Uses [https://fakestoreapi.in/](https://fakestoreapi.in/) for all product/category data.
+- Cart is stored in `localStorage` (not persisted across browsers/devices).
+- No authentication or checkout flow (demo only).
+- Product images and data depend on the external API’s availability and structure.
+
+---
+
+## 💡 What Could Be Improved
+
+- Add a global cart badge (using React Context or Zustand)
+- Add error handling and loading skeletons
+- Add product search and sorting
+- Add user authentication and checkout flow
+- Write unit and integration tests
+- Deploy to Vercel/Netlify with preview URL
+
+---
+
+## 📚 Learn More
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Learn Next.js](https://nextjs.org/learn)
+- [TailwindCSS Documentation](https://tailwindcss.com/docs)
+
+---
+
+## 🚀 Deploy
+
+The easiest way to deploy your Next.js app is to use [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
+
+---
+
+## 📄 License
+
+MIT
+
+---
+
+**Happy coding!** 🎉
+
+---
+
+Let me know if you want this as a file or need a sample `package.json` or `.gitignore`!
