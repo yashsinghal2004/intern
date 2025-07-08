@@ -117,7 +117,6 @@ export default function Home() {
           Cart
         </Link>
       </div>
-      {/* Pagination Bar */}
       <div className="flex justify-center items-center p-1 overflow-x-auto">
         {[...Array(totalPages).keys()].map((n) => (
           <button
