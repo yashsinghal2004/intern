@@ -7,6 +7,21 @@ Features infinite scroll, category filtering, product detail view, and a persist
 
 ---
 
+## Interview Feature-
+
+- **On 1st page Render 16 products and on rest pages-8 prducts each**
+Initialised the pagesize with 16 and conditioning while fetching in useEffect() hook
+
+if (pageNum === 1) {
+  setPageSize(16);
+  fetchProducts(1, selectedCategory, 16);
+} else {
+  setPageSize(8);
+  fetchProducts(pageNum, selectedCategory, 8);
+}
+
+
+
 ## 🚀 Features
 
 - **Infinite Scroll** with dynamic pagination bar

@@ -3,13 +3,11 @@ import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-const PAGE_SIZE = 8;
-
 const ProductCard = React.forwardRef(({ id, image, title, price }, ref) => (
   <Link href={`/product/${id}`}>
     <div
       ref={ref}
-      className="flex flex-col border p-2 m-1 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 min-w-[220px] max-w-xs bg-white hover:shadow-lg transition"
+      className="flex flex-col border p-2 m-1 bg-white hover:shadow-lg transition w-full max-w-xs"
     >
       <Image className="mx-auto" src={image} alt={title} width={100} height={100} />
       <h2 className="mt-2 text-base font-semibold line-clamp-2">{title}</h2>
@@ -22,6 +20,7 @@ ProductCard.displayName = "ProductCard";
 export default function Home() {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(16);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [categories, setCategories] = useState([]);
@@ -36,19 +35,19 @@ export default function Home() {
       .then((data) => setCategories(data));
   }, []);
 
-  const fetchProducts = async (page, category = selectedCategory) => {
+  const fetchProducts = async (page, category = selectedCategory, size = pageSize) => {
     setLoading(true);
     let url = category
-      ? `https://fakestoreapi.in/api/categories/${category}/products?page=${page}&limit=${PAGE_SIZE}`
-      : `https://fakestoreapi.in/api/products?page=${page}&limit=${PAGE_SIZE}`;
+      ? `https://fakestoreapi.in/api/categories/${category}/products?page=${page}&limit=${size}`
+      : `https://fakestoreapi.in/api/products?page=${page}&limit=${size}`;
     const res = await fetch(url);
     const json = await res.json();
 
     const newProducts = json.products || [];
     if (json.total) setTotalProducts(json.total);
-    if (!json.total && newProducts.length < PAGE_SIZE) setHasMore(false);
+    if (!json.total && newProducts.length < size) setHasMore(false);
     setProducts((prev) => (page === 1 ? newProducts : [...prev, ...newProducts]));
-    setHasMore(newProducts.length === PAGE_SIZE);
+    setHasMore(newProducts.length === size);
     setPagesLoaded((prev) => (page > prev ? page : prev));
     setLoading(false);
   };
@@ -58,7 +57,8 @@ export default function Home() {
     setCurrentPage(1);
     setPagesLoaded(1);
     setHasMore(true);
-    fetchProducts(1, selectedCategory);
+    setPageSize(16);
+    fetchProducts(1, selectedCategory, 16);
   }, [selectedCategory]);
 
   useEffect(() => {
@@ -68,7 +68,8 @@ export default function Home() {
         if (entries[0].isIntersecting) {
           setCurrentPage((prev) => {
             const nextPage = prev + 1;
-            fetchProducts(nextPage);
+            setPageSize(8);
+            fetchProducts(nextPage, selectedCategory, 8);
             return nextPage;
           });
         }
@@ -83,17 +84,23 @@ export default function Home() {
         observer.unobserve(lastProductRef.current);
       }
     };
-  }, [loading, hasMore, products]);
+  }, [loading, hasMore, products, selectedCategory]);
 
   const totalPages = totalProducts
-    ? Math.ceil(totalProducts / PAGE_SIZE)
+    ? 1 + Math.ceil((totalProducts - 16) / 8)
     : pagesLoaded;
 
   const handlePageClick = (pageNum) => {
     setCurrentPage(pageNum);
     setProducts([]);
     setHasMore(true);
-    fetchProducts(pageNum, selectedCategory);
+    if (pageNum === 1) {
+      setPageSize(16);
+      fetchProducts(1, selectedCategory, 16);
+    } else {
+      setPageSize(8);
+      fetchProducts(pageNum, selectedCategory, 8);
+    }
     setPagesLoaded(pageNum);
   };
 
@@ -129,20 +136,20 @@ export default function Home() {
         ))}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 justify-items-center">
-  {products.map((prod, idx) => {
-    const isLast = idx === products.length - 1;
-    return (
-      <ProductCard
-        key={prod.id}
-        ref={isLast ? lastProductRef : null}
-        id={prod.id}
-        title={prod.title}
-        image={prod.image}
-        price={prod.price}
-      />
-    );
-  })}
-</div>
+        {products.map((prod, idx) => {
+          const isLast = idx === products.length - 4;
+          return (
+            <ProductCard
+              key={prod.id}
+              ref={isLast ? lastProductRef : null}
+              id={prod.id}
+              title={prod.title}
+              image={prod.image}
+              price={prod.price}
+            />
+          );
+        })}
+      </div>
       {loading && (
         <div className="flex justify-center items-center p-4">
           <span className="text-lg">Loading...</span>
