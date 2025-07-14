@@ -10,7 +10,7 @@ Features infinite scroll, category filtering, product detail view, and a persist
 ## Interview Feature-
 
 - **On 1st page Render 16 products and on rest pages-8 prducts each**
-Initialised the pagesize with 16 and conditioning while fetching in useEffect() hook
+: Initialised the pagesize with 16 and conditioning while fetching in useEffect() hook
 
 if (pageNum === 1) {
   setPageSize(16);
