@@ -20,6 +20,10 @@ if (pageNum === 1) {
   fetchProducts(pageNum, selectedCategory, 8);
 }
 
+- **From second last row of each page product load - trigger infinite scroll**
+
+const isLast = idx === products.length - 4;
+
 
 
 ## 🚀 Features
