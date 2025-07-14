@@ -104,7 +104,6 @@ product-catalog/
 - Add product search and sorting
 - Add user authentication and checkout flow
 - Write unit and integration tests
-- Deploy to Vercel/Netlify with preview URL
 
 ---
 
@@ -116,12 +115,6 @@ product-catalog/
 
 ---
 
-## 🚀 Deploy
-
-The easiest way to deploy your Next.js app is to use [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
-
----
-
 ## 📄 License
 
 MIT
@@ -130,6 +123,4 @@ MIT
 
 **Happy coding!** 🎉
 
----
 
-Let me know if you want this as a file or need a sample `package.json` or `.gitignore`!
